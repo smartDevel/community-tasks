@@ -22,7 +22,7 @@ const Home = (props) => {
     return (
       <div className="container">
         <div className="section">
-          <h1>Collaborative Task Lists</h1>
+          <h1>Kollaborative Aufgabenlisten</h1>
           <small>
             Powered by <a href="https://supabase.io">Supabase</a>
           </small>
@@ -33,12 +33,12 @@ const Home = (props) => {
               newList(history)
             }}
           >
-            new task list
+            Neue Aufgabenliste
           </button>
         </div>
         <div className="section build">
           <h3>
-            Build this yourself:
+            HowTo:
             <br />
             <a href="https://dev.to/awalias/howto-build-collaborative-realtime-task-lists-in-react-4k52">
               Tutorial

@@ -8,7 +8,7 @@ export const TodoList = (uuid) => {
 
   return (
     <div className="container">
-      <Link to="/">back</Link>
+      <Link to="/">zurück</Link>
       <h1 className="section">Community Aufgabenliste</h1>
       <div className="section">
         <label>Aufruf-Link zum Bearbeiten und Anzeigen: </label>
