@@ -12,6 +12,7 @@ export const useStore = (props) => {
   const [newTask, handleNewTask] = useState()
   const [taskListener, setTaskListener] = useState(null)
 
+  
   useEffect(() => {
     fetchList(props.uuid)
       .then((response) => {
