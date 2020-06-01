@@ -1,4 +1,4 @@
-## Collaborative Realtime Task Lists
+## Kollaborative Echtzeit-Aufgabenlisten (Community Tasklist)
 
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/n48hnd9zl78a0uq68xak.png)
 
@@ -6,15 +6,15 @@
 
 [https://dev.to/awalias/howto-build-collaborative-realtime-task-lists-in-react-4k52](https://dev.to/awalias/howto-build-collaborative-realtime-task-lists-in-react-4k52)
 
-## Warning
+## Achtung!!
 
-This demo doesn't provide any form of client-side authentication so please don't use it in
-production unless you're ok with all your tasks being publicly available
+Diese Anwendung bietet keine clientseitige Authentifizierung. Bitte daher nicht in
+Produktion verwenden sofern NICHT damit einverstanden, dass alle Aufgaben und Angaben in der App öffentlich verfügbar sind !!
 
-## Required env vars
+## Erforderliche env Umgebungs-Variablen
 
-Make a `.env` in this folder with the following, 
-you can get these values from your project dashboard at [app.supabase.io](app.supabase.io):
+Erstelle im root-Ordner eine `.env` mit den folgenden Angaben:
+die Werte können aus dem Projekt-Dashboard unter [app.supabase.io](app.supabase.io) abgerufen werden :
 
 ```bash
 REACT_APP_SUPABASE_URL=<your-supabase-url>
