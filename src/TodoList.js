@@ -9,9 +9,9 @@ export const TodoList = (uuid) => {
   return (
     <div className="container">
       <Link to="/">back</Link>
-      <h1 className="section">My Task List</h1>
+      <h1 className="section">Community Aufgabenliste</h1>
       <div className="section">
-        <label>Sharing url: </label>
+        <label>Aufruf-Link zum Bearbeiten und Anzeigen: </label>
         <input type="text" readOnly value={window.location.href} />
       </div>
       <div className={'field-row section'}>
@@ -28,7 +28,7 @@ export const TodoList = (uuid) => {
             onChange={(e) => setNewTaskText(e.target.value)}
           />
           <button type="submit" onClick={() => (newTaskText ? addTask(newTaskText, list.id) : '')}>
-            add task
+            Aufgabe hinzufügen
           </button>
         </form>
       </div>
@@ -64,7 +64,7 @@ export const TodoList = (uuid) => {
       </div>
       <div className="section">
         <small>
-          warning: do not store any sensitive information in this list, it is not secure
+          Achtung: Bitte keine sensiblen Informationen hier eintragen, da die Liste öffentlich aufrufbar und einsehbar ist !
         </small>
       </div>
     </div>
