@@ -8,11 +8,11 @@ export const TodoList = (uuid) => {
 
   return (
     <div className="container">
-      <Link to="/">zurück</Link>
-      <h1 className="section">Community Aufgabenliste</h1>
+      <Link to="/">Zurück/Neustart</Link>
+      <h1 className="section">✍🏼🧾✨Community Aufgabenliste✨🔜 ✔️</h1>
       <div className="section">
         <label>Aufruf-Link zum Bearbeiten und Anzeigen: </label>
-        <input type="text" readOnly value={window.location.href} />
+        <input className="inputField" type="text" readOnly value={window.location.href} />
       </div>
       <div className={'field-row section'}>
         <form
@@ -21,6 +21,7 @@ export const TodoList = (uuid) => {
             setNewTaskText('')
           }}
         >
+          <label>Neue Aufgabe hier eintragen und hinzufügen: </label>
           <input
             id="newtask"
             type="text"

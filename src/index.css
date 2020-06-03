@@ -6,8 +6,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.bNew {
+  color: red;
+  background-color: black;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.container {
+  margin: 5px;
+  padding: 10px;
+  color: rgba(14, 26, 187, 0.815);
+  background-color: rgba(184, 190, 190, 0.993);
+}
+.inputField {
+  width: 500px;
+  background-color: thistle;
 }
