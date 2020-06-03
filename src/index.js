@@ -23,7 +23,7 @@ const Home = (props) => {
   const uuid = queryString.parse(props.location.search).uuid;
 
   //GIF-Animation auf wordpress für Startscreen-Bild
-  const imgStartscreen = "https://ways4eu.files.wordpress.com/2020/06/startscreengifanimation.gif"
+  const imgStartscreen = "https://ways4eu.files.wordpress.com/2020/06/startscreengifanimation.gif";
   //JPG- Bild auf wordpress für startscreen
   //  "https://ways4eu.files.wordpress.com/2020/06/communitytaskliststart.jpg";
   //    "https://res.cloudinary.com/practicaldev/image/fetch/s--0Q5C-mHV--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--vlXt7rid--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://dev-to-uploads.s3.amazonaws.com/i/cjjivuwyazvady0ddhyi.png";
