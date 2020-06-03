@@ -1,6 +1,6 @@
 ## Kollaborative Echtzeit-Aufgabenlisten (Community Tasklist)
 
-![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/n48hnd9zl78a0uq68xak.png)
+![Alt Text](https://ways4eu.files.wordpress.com/2020/06/startscreengifanimationv02.gif)
 
 ## Tutorial
 
