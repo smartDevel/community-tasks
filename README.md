@@ -4,7 +4,7 @@
 
 ## Tutorial
 
-[https://dev.to/awalias/howto-build-collaborative-realtime-task-lists-in-react-4k52](https://dev.to/awalias/howto-build-collaborative-realtime-task-lists-in-react-4k52)
+[https://wp.me/p4wJQa-xa](https://wp.me/p4wJQa-xa)
 
 ## Achtung!!
 
