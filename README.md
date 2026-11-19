@@ -1,59 +1,52 @@
 ## Kollaborative Echtzeit-Aufgabenlisten (Community Tasklist)
 
-![Alt Text](https://ways4eu.files.wordpress.com/2020/06/startscreengifanimationv02.gif)
+![Community Tasklist](https://ways4eu.files.wordpress.com/2020/06/startscreengifanimationv02.gif)
 
 ## Tutorial
 
 [https://wp.me/p4wJQa-xa](https://wp.me/p4wJQa-xa)
 
-## Achtung!!
+## Achtung
 
-Diese Anwendung bietet keine clientseitige Authentifizierung. Bitte daher nicht in
-Produktion verwenden sofern NICHT damit einverstanden, dass alle Aufgaben und Angaben in der App öffentlich verfügbar sind !!
+Diese Anwendung bietet keine clientseitige Authentifizierung. Bitte daher keine sensiblen Informationen eintragen. Listen sind über ihre URL öffentlich aufrufbar.
 
-## Erforderliche env Umgebungs-Variablen
+## Erforderliche Umgebungsvariablen
 
-Erstelle im root-Ordner eine `.env` mit den folgenden Angaben:
-die Werte können aus dem Projekt-Dashboard unter [app.supabase.io](app.supabase.io) abgerufen werden :
+Erstelle im Root-Ordner eine `.env` mit den folgenden Angaben. Die Werte können aus dem Supabase-Projekt-Dashboard abgerufen werden:
 
 ```bash
-REACT_APP_SUPABASE_URL=<your-supabase-url>
-REACT_APP_SUPABASE_KEY=<your-supabase-key>
+SUPABASE_URL=<your-supabase-url>
+SUPABASE_PUBLISHABLE_KEY=<your-publishable-key>
 ```
 
-## Available Scripts
+Diese Namen werden von der aktuellen Supabase–Vercel-Integration automatisch gesetzt. Die bisherigen Variablennamen `REACT_APP_SUPABASE_URL` und `REACT_APP_SUPABASE_KEY` bleiben aus Kompatibilitätsgründen ebenfalls unterstützt.
 
-In the project directory, you can run:
+## Neues Supabase-Projekt einrichten
 
-### `yarn start`
+1. Im Supabase-Dashboard ein neues Projekt anlegen.
+2. Den SQL Editor öffnen und den Inhalt von [`supabase/schema.sql`](supabase/schema.sql) ausführen.
+3. Unter **Project Settings → API** die Projekt-URL und den öffentlichen `anon`-/Publishable-Key kopieren.
+4. Das bestehende Vercel-Projekt `community-tasks-8k5m` über die Supabase–Vercel-Integration verbinden. Dadurch werden `SUPABASE_URL` und `SUPABASE_PUBLISHABLE_KEY` für Preview und Production synchronisiert. Alternativ können beide Werte manuell in Vercel eingetragen werden.
+5. Das Vercel-Deployment erneut starten und Erstellen, Laden, Aktualisieren sowie Echtzeit-Synchronisation einer Testliste prüfen.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Das Schema erlaubt absichtlich anonymes Lesen, Erstellen und Aktualisieren. Die Anwendung darf daher keine sensiblen Daten enthalten.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Entwicklung und Build
 
-### `yarn test`
+Benötigt wird Node.js 20.19 oder neuer.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm install`
 
-### `yarn build`
+Installiert die Abhängigkeiten.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm start`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Startet den Vite-Entwicklungsserver.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm run build`
 
-### `yarn eject`
+Erstellt den optimierten Produktions-Build im Ordner `build`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `npm run preview`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Startet eine lokale Vorschau des Produktions-Builds.
