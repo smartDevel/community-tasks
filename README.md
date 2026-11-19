@@ -15,18 +15,18 @@ Diese Anwendung bietet keine clientseitige Authentifizierung. Bitte daher keine 
 Erstelle im Root-Ordner eine `.env` mit den folgenden Angaben. Die Werte können aus dem Supabase-Projekt-Dashboard abgerufen werden:
 
 ```bash
-REACT_APP_SUPABASE_URL=<your-supabase-url>
-REACT_APP_SUPABASE_KEY=<your-supabase-key>
+SUPABASE_URL=<your-supabase-url>
+SUPABASE_PUBLISHABLE_KEY=<your-publishable-key>
 ```
 
-Die bisherigen Variablennamen bleiben aus Kompatibilitätsgründen erhalten.
+Diese Namen werden von der aktuellen Supabase–Vercel-Integration automatisch gesetzt. Die bisherigen Variablennamen `REACT_APP_SUPABASE_URL` und `REACT_APP_SUPABASE_KEY` bleiben aus Kompatibilitätsgründen ebenfalls unterstützt.
 
 ## Neues Supabase-Projekt einrichten
 
 1. Im Supabase-Dashboard ein neues Projekt anlegen.
 2. Den SQL Editor öffnen und den Inhalt von [`supabase/schema.sql`](supabase/schema.sql) ausführen.
 3. Unter **Project Settings → API** die Projekt-URL und den öffentlichen `anon`-/Publishable-Key kopieren.
-4. Beide Werte lokal in `.env` und bei Vercel für **Preview** und **Production** als `REACT_APP_SUPABASE_URL` und `REACT_APP_SUPABASE_KEY` eintragen.
+4. Das bestehende Vercel-Projekt `community-tasks-8k5m` über die Supabase–Vercel-Integration verbinden. Dadurch werden `SUPABASE_URL` und `SUPABASE_PUBLISHABLE_KEY` für Preview und Production synchronisiert. Alternativ können beide Werte manuell in Vercel eingetragen werden.
 5. Das Vercel-Deployment erneut starten und Erstellen, Laden, Aktualisieren sowie Echtzeit-Synchronisation einer Testliste prüfen.
 
 Das Schema erlaubt absichtlich anonymes Lesen, Erstellen und Aktualisieren. Die Anwendung darf daher keine sensiblen Daten enthalten.
