@@ -21,6 +21,16 @@ REACT_APP_SUPABASE_KEY=<your-supabase-key>
 
 Die bisherigen Variablennamen bleiben aus Kompatibilitätsgründen erhalten.
 
+## Neues Supabase-Projekt einrichten
+
+1. Im Supabase-Dashboard ein neues Projekt anlegen.
+2. Den SQL Editor öffnen und den Inhalt von [`supabase/schema.sql`](supabase/schema.sql) ausführen.
+3. Unter **Project Settings → API** die Projekt-URL und den öffentlichen `anon`-/Publishable-Key kopieren.
+4. Beide Werte lokal in `.env` und bei Vercel für **Preview** und **Production** als `REACT_APP_SUPABASE_URL` und `REACT_APP_SUPABASE_KEY` eintragen.
+5. Das Vercel-Deployment erneut starten und Erstellen, Laden, Aktualisieren sowie Echtzeit-Synchronisation einer Testliste prüfen.
+
+Das Schema erlaubt absichtlich anonymes Lesen, Erstellen und Aktualisieren. Die Anwendung darf daher keine sensiblen Daten enthalten.
+
 ## Entwicklung und Build
 
 Benötigt wird Node.js 20.19 oder neuer.
