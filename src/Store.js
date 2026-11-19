@@ -1,101 +1,90 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
   process.env.REACT_APP_SUPABASE_KEY
 )
-//Kommentar
-export const useStore = (props) => {
+
+const throwIfError = ({ error }) => {
+  if (error) throw error
+}
+
+export const useStore = ({ uuid }) => {
   const [list, setList] = useState(null)
   const [tasks, setTasks] = useState([])
-  const [newTask, handleNewTask] = useState()
-  const [taskListener, setTaskListener] = useState(null)
 
-  
   useEffect(() => {
-    fetchList(props.uuid)
-      .then((response) => {
-        setList(response)
-        setTasks(response.tasks.sort((a, b) => b.id - a.id))
+    let active = true
+
+    fetchList(uuid)
+      .then((data) => {
+        if (!active) return
+        setList(data)
+        setTasks([...data.tasks].sort((a, b) => b.id - a.id))
       })
       .catch(console.error)
-  }, [props.uuid])
+
+    return () => {
+      active = false
+    }
+  }, [uuid])
 
   useEffect(() => {
-    const handleAsync = async () => {
-      if (newTask) {
-        // could be an update
-        let update = tasks.find((task, i) => {
-          if (task.id === newTask.id) {
-            tasks[i] = newTask
-            return true
-          } else {
-            return false
-          }
-        })
-        if (update) {
-          setTasks(t => [...tasks]) // update
-        } else {
-          tasks.unshift(newTask)
-          setTasks(t => [...tasks]) // new
+    if (!list) return undefined
+
+    const applyTask = (task) => {
+      setTasks((current) => {
+        const existing = current.some(({ id }) => id === task.id)
+        if (existing) {
+          return current.map((item) => (item.id === task.id ? task : item))
         }
-      }
+        return [task, ...current]
+      })
     }
-    handleAsync()
-  }, [newTask])
 
-  useEffect(() => {
-    if (!taskListener && list) {
-      setTaskListener(
-        supabase
-          .from(`tasks:list_id=eq.${list.id}`)
-          .on('INSERT', (payload) => handleNewTask(payload.new))
-          .on('UPDATE', (payload) => handleNewTask(payload.new))
-          .subscribe()
+    const channel = supabase
+      .channel(`tasks-list-${list.id}`)
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'tasks', filter: `list_id=eq.${list.id}` },
+        ({ new: task }) => applyTask(task)
       )
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'tasks', filter: `list_id=eq.${list.id}` },
+        ({ new: task }) => applyTask(task)
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
     }
-  }, [list, taskListener])
+  }, [list])
 
   return { list, tasks, setTasks }
 }
 
 export const addTask = async (task_text, list_id) => {
-  try {
-    let { body } = await supabase.from('tasks').insert([{ task_text, list_id }])
-    return body
-  } catch (error) {
-    console.log('error', error)
-  }
+  const result = await supabase.from('tasks').insert([{ task_text, list_id }]).select().single()
+  throwIfError(result)
+  return result.data
 }
 
 export const updateTask = async (task_id, values) => {
-  try {
-    let { body } = await supabase.from('tasks').eq('id', task_id).update(values)
-    return body
-  } catch (error) {
-    console.log('error', error)
-  }
+  const result = await supabase.from('tasks').update(values).eq('id', task_id).select().single()
+  throwIfError(result)
+  return result.data
 }
 
 export const createList = async (uuid) => {
-  try {
-    let { body } = await supabase.from('lists').insert([{ uuid }])
-    return body[0]
-  } catch (error) {
-    console.log('error', error)
-  }
+  const result = await supabase.from('lists').insert([{ uuid }]).select().single()
+  throwIfError(result)
+  return result.data
 }
 
 export const fetchList = async (list_uuid) => {
-  try {
-    let { body } = await supabase
-      .from('lists')
-      .eq('uuid', list_uuid)
-      .select(`*, tasks(*)`)
-      .single()
-    return body
-  } catch (error) {
-    console.log('error', error)
-  }
+  const result = await supabase.from('lists').select('*, tasks(*)').eq('uuid', list_uuid).single()
+  throwIfError(result)
+  return result.data
 }
